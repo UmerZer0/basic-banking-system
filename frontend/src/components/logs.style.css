@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+.body{
+    height: 100vh;
+}
+.log{
+    color:navajowhite;
+    font-size: 1.5rem;
+    margin: 0;
+}
+.sender, .receiver{
+    color: chartreuse;
+    margin: 0 .5em;
+}
+.heading{
+    font-family: 'Ubuntu', sans-serif;
+    color: blueviolet;
+}
