@@ -1,9 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Button } from "react-bootstrap";
-import { Modal } from "react-bootstrap";
-import { InputGroup } from "react-bootstrap";
-import { Form } from "react-bootstrap";
+import { Button, Modal, InputGroup, Form } from "react-bootstrap";
 import "./modal.style.css";
 
 function MyVerticallyCenteredModal(props) {
@@ -61,39 +58,48 @@ function MyVerticallyCenteredModal(props) {
         <Button
           onClick={() => {
             let data = document.getElementsByClassName("input");
-            let balanceError = document.querySelector(".balance-error");
-            let accountNoError = document.querySelector(".accountno-error");
-            let sender = props.customer["accountNo"];
             let receiver = data[0].value;
             let amount = data[1].value;
+
+            //TODO Add all the errors
+            let balanceError = document.querySelector(".balance-error");
+            let sender = props.customer["accountNo"];
             console.log(sender, receiver, amount);
 
             //!Receiver
             axios
               .get("http://localhost:5000/customers/accountNo/" + sender)
               .then((response) => {
-                let balance = response.data.balance;
+                let senderBalance = response.data.balance;
 
-                if (balance < amount) {
+                if (senderBalance < amount) {
                   balanceError.innerHTML = "Insufficient Balance";
                 } else {
                   axios.post(
                     "http://localhost:5000/customers/update/accountNo/" +
                       sender,
-                    { balance: balance - amount }
+                    { balance: senderBalance - amount }
                   );
 
                   //!Sender
+
                   axios
-                    .post(
-                      "http://localhost:5000/customers/update/accountNo/" +
-                        receiver,
-                      {
-                        balance: response.data.balance - -amount,
-                      }
+                    .get(
+                      "http://localhost:5000/customers/accountNo/" + receiver
                     )
-                    .finally(() => {
-                      window.location = "/customers";
+                    .then((response) => {
+                      let receiverBalance = response.data.balance;
+                      axios
+                        .post(
+                          "http://localhost:5000/customers/update/accountNo/" +
+                            receiver,
+                          {
+                            balance: receiverBalance - -amount,
+                          }
+                        )
+                        .finally(() => {
+                          window.location = "/customers";
+                        });
                     });
 
                   //! Record of transaction
@@ -121,7 +127,11 @@ function App(props) {
 
   return (
     <>
-      <Button variant="dark" size="sm" onClick={() => setModalShow(true)}>
+      <Button
+        variant="dark"
+        className="btn-transfer"
+        onClick={() => setModalShow(true)}
+      >
         Send Money
       </Button>
 

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-// import { Link } from "react-router-dom";
 import axios from "axios";
-// import "./logs.style.css";
+import "./logs.style.css";
 import { ListGroup } from "react-bootstrap";
+import NavBar from "./Navbar";
 
 export default class logs extends Component {
   constructor(props) {
@@ -42,10 +42,10 @@ export default class logs extends Component {
   logList() {
     return this.state.logs.map((currentlog, i) => {
       return (
-        <ListGroup.Item variant="warning">
+        <ListGroup.Item variant="warning" className="list-item">
           <span>[{this.formatDate(currentlog.createdAt)}] </span>
           <span className="sender ">{currentlog.sender} </span>
-          <span>&nbsp;sent ${currentlog.amount} to&nbsp; </span>
+          <span>sent ${currentlog.amount} to </span>
           <span className="receiver">{currentlog.receiver}</span>
         </ListGroup.Item>
       );
@@ -54,9 +54,10 @@ export default class logs extends Component {
 
   render() {
     return (
-      <div className="body m-5">
-        <h1 className="d-flex justify-content-center bold fw-bold m-3">LOGS</h1>
-        <ListGroup className="w-auto">{this.logList()}</ListGroup>
+      <div className="box">
+        <NavBar />
+        <h1 className="d-flex justify-content-center bold fw-bold m-3">Logs</h1>
+        <ListGroup className="transactions-list">{this.logList()}</ListGroup>
       </div>
     );
   }

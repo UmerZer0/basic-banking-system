@@ -1,0 +1,11 @@
+.navbar {
+  margin: 2rem 7rem 0;
+}
+.nav {
+  gap: 1rem;
+}
+.link {
+  color: #fff !important;
+  font-weight: 600;
+  font-size: large;
+}

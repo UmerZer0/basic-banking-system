@@ -1,0 +1,55 @@
+.navbar {
+  color: #fff;
+}
+
+.outer-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.heading-box {
+  color: white;
+  /* display: flex;
+  flex-direction: column; */
+  margin: 5rem 0 0 7rem;
+}
+
+.row-size {
+  max-width: 25rem;
+  margin: 0;
+  display: flex;
+}
+
+.bold-italic {
+  font-weight: bold;
+  font-style: italic;
+}
+
+.check-btn {
+  background-color: #fff;
+
+  margin: 1rem 0 0 3rem;
+  padding: 0.3rem 1.6rem 0;
+
+  font-weight: 650;
+  font-style: italic;
+  font-size: 1.1em;
+
+  border: none;
+  border-radius: 0 2em 2em 0;
+}
+.check-btn > img {
+  margin-left: 1.2rem;
+}
+
+.overflow-check {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+.image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
