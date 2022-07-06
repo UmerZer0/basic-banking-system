@@ -1,20 +1,41 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./list.style.css";
-import { Table } from "react-bootstrap";
-import Modal from "./modal";
 import NavBar from "./Navbar";
+import { ReactComponent as UserSvg } from "./svg/userSolid.svg";
+import CustomerDetails from "./CutomerDetails";
 
 const Customer = (props) => (
-  <tr>
-    <td>{props.customer.name}</td>
-    <td>{props.customer.accountNo}</td>
-    <td>{props.customer.email}</td>
-    <td>${props.customer.balance}</td>
-    <td className="dp-flex text-center">
-      <Modal customer={props.customer} />
-    </td>
-  </tr>
+  <section
+    className="customer-info"
+    onClick={() => {
+      let card = document.getElementById("card");
+      let content = document.getElementsByClassName("customer");
+
+      if (card.style.opacity !== "1") card.style.opacity = "1";
+      content[0].innerHTML = props.customer.name;
+      content[1].innerHTML = props.customer.email;
+      content[2].innerHTML = props.customer.accountNo;
+      content[3].innerHTML = "$" + props.customer.balance;
+
+      card.style.width = "20rem";
+      document.getElementById("transfer-input").classList.add("disp-none");
+
+      document.getElementsByClassName("error")[0].innerHTML = "";
+      document.getElementsByClassName("error")[1].innerHTML = "";
+    }}
+  >
+    <div className="frame">
+      <div className="user-icon">
+        <UserSvg />
+      </div>
+    </div>
+    <div className="info-container">
+      <h2 className="user-name">{props.customer.name}</h2>
+      <p className="account-number">{props.customer.accountNo}</p>
+    </div>
+  </section>
+  // </tr>
 );
 
 export default class customersList extends Component {
@@ -31,6 +52,7 @@ export default class customersList extends Component {
   }
 
   componentDidMount() {
+    // document.getElementById("card").style.display = "none";
     axios
       .get("http://localhost:5000/customers")
       .then((response) => {
@@ -61,27 +83,15 @@ export default class customersList extends Component {
 
   render() {
     return (
-      <div className="table-container">
+      <>
         <NavBar />
-        <Table
-          responsive="sm"
-          hover
-          striped
-          className="customers-table"
-          size="sm"
-        >
-          <thead className="text-primary">
-            <tr>
-              <th>Name</th>
-              <th>Account No.</th>
-              <th>Email</th>
-              <th>Balance</th>
-              {/* <th>Send</th> */}
-            </tr>
-          </thead>
-          <tbody>{this.customerList()}</tbody>
-        </Table>
-      </div>
+        <div className="body">
+          <div className="table-container">{this.customerList()}</div>
+          <div className="details-card">
+            <CustomerDetails />
+          </div>
+        </div>
+      </>
     );
   }
 }

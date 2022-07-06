@@ -1,0 +1,144 @@
+#card {
+  display: grid;
+  background-color: hsl(177, 22%, 35%);
+  color: #fff;
+  place-content: center;
+  text-align: center;
+  place-items: center;
+  justify-self: center;
+
+  width: 20rem;
+  height: fit-content;
+  padding: 2em 0em;
+
+  border-radius: 0.3em;
+  position: relative;
+  /* position: fixed; */
+
+  opacity: 0;
+
+  transition: 0s, opacity 0.25s ease-in;
+  box-shadow: 0 0.3em 0.5em rgba(0, 0, 0, 0.5);
+}
+
+.close {
+  background-color: transparent;
+  border: none;
+  outline: auto;
+  color: #fff;
+  font-weight: 700;
+  outline: 0;
+
+  width: fit-content;
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  margin: 1rem;
+}
+.close:focus {
+  outline: 0;
+}
+
+.top-content {
+  margin: 1em 0 0em;
+}
+
+.name {
+  font-weight: bold;
+  margin: 0 0 0.2em 0;
+}
+.email {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.acc-number {
+  font-weight: 525;
+}
+.balance {
+  font-style: italic;
+  font-weight: bold;
+  font-size: large;
+}
+.top-content p {
+  margin: 0;
+}
+
+.pic-frame {
+  display: grid;
+  background-color: hsl(0, 0%, 79%);
+  width: 9em;
+  height: 9em;
+  place-content: center;
+  align-content: end;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 0.125rem 0.35rem 0 rgba(0, 0, 0, 0.1);
+}
+.profile-pic {
+  width: 6.9em;
+}
+
+.send-btn {
+  background-color: hsl(201, 100%, 51%);
+  border: none;
+  border-radius: 0.2em;
+  color: #fff;
+  font-weight: bold;
+  padding: 0.4em 0.8em;
+
+  margin: 1.5em 0 0;
+}
+
+.input-field-container {
+  display: flex;
+}
+
+.emoji-container {
+  display: flex;
+  align-items: center;
+
+  background-color: hsl(210, 16%, 93%);
+  padding: 0 0.75em;
+
+  border: 1px solid #ced4da;
+  border-radius: 0.25em 0 0 0.25em;
+}
+
+.input-field {
+  border: none;
+  border-radius: 0 0.25em 0.25em 0;
+  padding: 0.4em 0.75em;
+  outline: none;
+
+  color: hsl(177, 22%, 35%);
+}
+
+.disp-none {
+  display: none;
+}
+
+.input-label {
+  display: block;
+  text-align: left;
+
+  padding-left: 0.5em;
+  margin: 0.6em 0 0.4em;
+
+  font-size: 1.125rem;
+}
+
+.error {
+  background: rgb(255, 0, 0, 0.3);
+  border: 2px solid hsl(0 100% 50% / 1);
+  border-radius: 0.25em;
+  padding: 0.5em;
+  margin: 0;
+  margin-top: 0.2em;
+
+  text-align: left;
+  color: black;
+}
+.error:empty {
+  display: none;
+}

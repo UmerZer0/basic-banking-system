@@ -1,12 +1,2 @@
-.error {
-  background: hsl(0 100% 50% / 0.2);
-  border: 2px solid hsl(0 100% 50% / 1);
-  border-radius: 0.125em;
-  padding: 0.5em;
-}
-.error:empty {
-  display: none;
-}
-
 @media only screen and (max-width: 600px) {
 }

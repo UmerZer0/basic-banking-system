@@ -23,35 +23,44 @@ function MyVerticallyCenteredModal(props) {
         </label>
 
         <h5>{props.customer["name"]}</h5>
-        <label className="my-2">
+
+        <label className="">
           <b>Receiver</b>
         </label>
-        <InputGroup>
-          <InputGroup.Text>
-            <span role="img" aria-label="ATM emoji">
+
+        <div className="input-field-container">
+          <span className="emoji-container">
+            <span role="img" aria-label="Dollar emoji">
               🏧
             </span>
-          </InputGroup.Text>
-          <Form.Control
-            type="accoutnNo"
+          </span>
+          <input
+            type="email"
+            inputMode="email"
             placeholder="Account Number"
-            className="input"
+            className="input-field"
           />
-        </InputGroup>
+        </div>
         <p className="error accountno-error"></p>
 
-        <label className="my-2">
+        <label className="">
           <b>Amount</b>
         </label>
-        <InputGroup>
-          <InputGroup.Text>
+
+        <div className="input-field-container">
+          <span className="emoji-container">
             <span role="img" aria-label="Dollar emoji">
               💲
             </span>
-          </InputGroup.Text>
-          <Form.Control type="number" placeholder="Amount" className="input" />
-        </InputGroup>
-        <p className="error balance-error"></p>
+          </span>
+          <input
+            type="number"
+            inputMode="number"
+            placeholder="Amount"
+            className="input-field"
+          />
+        </div>
+        <p className="error accountno-error">Erorr</p>
       </Modal.Body>
 
       <Modal.Footer>
