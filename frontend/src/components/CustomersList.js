@@ -35,7 +35,6 @@ const Customer = (props) => (
       <p className="account-number">{props.customer.accountNo}</p>
     </div>
   </section>
-  // </tr>
 );
 
 export default class customersList extends Component {
@@ -53,6 +52,7 @@ export default class customersList extends Component {
 
   componentDidMount() {
     // document.getElementById("card").style.display = "none";
+    document.getElementsByClassName("nav-link")[1].classList.add("active-page");
     axios
       .get("http://localhost:5000/customers")
       .then((response) => {
