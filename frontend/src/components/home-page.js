@@ -7,6 +7,8 @@ export default function HomePage() {
   const isOverflown = (element) => element.scrollWidth > element.clientWidth;
 
   useEffect(() => {
+    document.getElementsByClassName("nav-link")[0].classList.add("active-page");
+
     const headings = document.getElementsByClassName("heading");
     headings[1].classList.add("bold-italic");
 

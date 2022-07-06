@@ -2,7 +2,7 @@ import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import "./Navbar.style.css";
 
-function navbar() {
+function navbarBS() {
   return (
     <Navbar bg="none" className="navbar">
       <Nav className="nav">
@@ -20,4 +20,4 @@ function navbar() {
   );
 }
 
-export default navbar;
+export default navbarBS;

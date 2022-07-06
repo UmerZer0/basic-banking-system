@@ -14,12 +14,13 @@ export default class logs extends Component {
   }
 
   componentDidMount() {
-    //TODO get logs from backend
+    document.getElementsByClassName("nav-link")[2].classList.add("active-page");
+
     axios.get("http://localhost:5000/logs").then((response) => {
       this.setState({ logs: response.data });
     });
   }
-  formatDate(date) {
+  formatDateTime(date, format) {
     let d = new Date(date),
       year = d.getFullYear(),
       month = "" + d.getMonth(),
@@ -34,31 +35,78 @@ export default class logs extends Component {
     if (minute.length < 2) minute = "0" + minute;
     if (second.length < 2) second = "0" + second;
 
-    console.log(year, month, day);
-    return (
-      [year, month, day].join("-") + " " + [hour, minute, second].join(":")
-    );
+    let monthNames = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    let datePart = monthNames[month - 1] + " " + day + ", " + year;
+    let timePart = [hour, minute, second].join(":");
+
+    /* format{
+    true: date only,
+    false: time only,
+    undefined: date and time,
+    }
+    */
+
+    if (format) return datePart;
+    else if (format === false) return timePart;
+    else return datePart + " " + timePart;
   }
+
   logList() {
     return this.state.logs.map((currentlog, i) => {
       return (
-        <ListGroup.Item variant="warning" className="list-item">
-          <span>[{this.formatDate(currentlog.createdAt)}] </span>
-          <span className="sender ">{currentlog.sender} </span>
-          <span>sent ${currentlog.amount} to </span>
-          <span className="receiver">{currentlog.receiver}</span>
-        </ListGroup.Item>
+        <section className="log">
+          <div className="time-box">
+            {this.formatDateTime(currentlog.createdAt, true)}
+          </div>
+
+          <div className="log-content">
+            <img src="./img/right.png" alt="credit card" width={60} />
+            <p className="log-details">
+              {/* <span>[{this.formatDate(currentlog.createdAt)}] </span> */}
+              <span className="sender ">{currentlog.sender} </span>
+              <span>sent ${currentlog.amount} to </span>
+              <span className="receiver">{currentlog.receiver}</span>
+            </p>
+          </div>
+        </section>
       );
     });
   }
 
   render() {
     return (
-      <div className="box">
-        <NavBar />
-        <h1 className="d-flex justify-content-center bold fw-bold m-3">Logs</h1>
-        <ListGroup className="transactions-list">{this.logList()}</ListGroup>
-      </div>
+      <>
+        <div className="box">
+          <NavBar />
+          <div className="logs-container">{this.logList()}</div>
+        </div>
+
+        {/* <section className="customer-info">
+          <div className="frame">
+            <div className="user-icon">
+              <UserSvg />
+            </div>
+          </div>
+          <div className="info-container">
+            <h2 className="user-name">{props.customer.name}</h2>
+            <p className="account-number">{props.customer.accountNo}</p>
+          </div>
+        </section> */}
+      </>
     );
   }
 }

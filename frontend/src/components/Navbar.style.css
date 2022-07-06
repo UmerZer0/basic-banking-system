@@ -4,8 +4,12 @@
 .nav {
   gap: 1rem;
 }
-.link {
+.nav-link {
   color: #fff !important;
   font-weight: 600;
   font-size: large;
+}
+
+.active-page {
+  font-weight: 700;
 }

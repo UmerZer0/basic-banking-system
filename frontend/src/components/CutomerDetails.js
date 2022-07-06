@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { ReactComponent as UserSvg } from "./svg/userSolid.svg";
 import "./CustomerDetails.style.css";
 import { ReactComponent as XmarkSvg } from "./svg/xmark-solid.svg";
-import { Button, Modal, InputGroup, Form } from "react-bootstrap";
 import axios from "axios";
 
 function CutomerDetails() {
@@ -183,5 +182,5 @@ export default CutomerDetails;
 /*  Add box shadow
     ?Fix the color on div
     Add functionalty to the button
-    ?Do the nav thing
+    Do the nav thing
     ?Do them logs */
