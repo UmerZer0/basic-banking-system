@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./logs.style.css";
-import { ListGroup } from "react-bootstrap";
 import NavBar from "./Navbar";
 
 export default class logs extends Component {
@@ -9,7 +8,7 @@ export default class logs extends Component {
     super(props);
 
     this.state = {
-      logs: [],
+      logs: {},
     };
   }
 
@@ -17,7 +16,15 @@ export default class logs extends Component {
     document.getElementsByClassName("nav-link")[2].classList.add("active-page");
 
     axios.get("http://localhost:5000/logs").then((response) => {
-      this.setState({ logs: response.data });
+      let formatData = {};
+      for (let i = response.data.length - 1; i >= 0; i--) {
+        let date = this.formatDateTime(response.data[i].createdAt, true);
+
+        if (formatData[date]) formatData[date].push(response.data[i]);
+        else formatData[date] = [response.data[i]];
+      }
+
+      this.setState({ logs: formatData });
     });
   }
   formatDateTime(date, format) {
@@ -65,24 +72,40 @@ export default class logs extends Component {
     else return datePart + " " + timePart;
   }
 
-  logList() {
-    return this.state.logs.map((currentlog, i) => {
+  destructArr(arr) {
+    return arr.map((key, i) => {
       return (
         <section className="log">
-          <div className="time-box">
-            {this.formatDateTime(currentlog.createdAt, true)}
-          </div>
-
           <div className="log-content">
-            <img src="./img/right.png" alt="credit card" width={60} />
-            <p className="log-details">
-              {/* <span>[{this.formatDate(currentlog.createdAt)}] </span> */}
-              <span className="sender ">{currentlog.sender} </span>
-              <span>sent ${currentlog.amount} to </span>
-              <span className="receiver">{currentlog.receiver}</span>
+            <div className="time-box grid-children">
+              {this.formatDateTime(key.createdAt, false)}
+            </div>
+            <div className="grid-children tick-icon">
+              <img src="./img/right.png" alt="credit card" width={60} />
+            </div>
+            <p className="log-details grid-children">
+              <span>
+                {key.sender} sent ${key.amount} to {key.receiver}
+              </span>
             </p>
+            <div className="grid-children"> </div>
           </div>
         </section>
+      );
+    });
+  }
+
+  logList() {
+    return Object.keys(this.state.logs).map((key, i) => {
+      let objArray = this.state.logs[key];
+
+      return (
+        <>
+          <div className="log-group-by-date">
+            <h2 className="log date-head">{key}</h2>
+            {this.destructArr(objArray)}
+          </div>
+        </>
       );
     });
   }
@@ -94,18 +117,6 @@ export default class logs extends Component {
           <NavBar />
           <div className="logs-container">{this.logList()}</div>
         </div>
-
-        {/* <section className="customer-info">
-          <div className="frame">
-            <div className="user-icon">
-              <UserSvg />
-            </div>
-          </div>
-          <div className="info-container">
-            <h2 className="user-name">{props.customer.name}</h2>
-            <p className="account-number">{props.customer.accountNo}</p>
-          </div>
-        </section> */}
       </>
     );
   }

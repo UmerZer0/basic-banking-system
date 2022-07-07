@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { ReactComponent as UserSvg } from "./svg/userSolid.svg";
 import "./CustomerDetails.style.css";
 import { ReactComponent as XmarkSvg } from "./svg/xmark-solid.svg";
@@ -19,7 +19,7 @@ function CutomerDetails() {
         </div>
       </div>
       <section className="top-content">
-        <h2 className="customer name"></h2>
+        <h2 className="customer name"> </h2>
         <p className="customer email"></p>
         <p className="customer acc-number"></p>
         <p className="customer balance"></p>
