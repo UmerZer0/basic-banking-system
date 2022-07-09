@@ -4,25 +4,16 @@ import NavBar from "./Navbar";
 import "./home.style.css";
 
 export default function HomePage() {
-  const isOverflown = (element) => element.scrollWidth > element.clientWidth;
-
   useEffect(() => {
     document.getElementsByClassName("nav-link")[0].classList.add("active-page");
 
     const headings = document.getElementsByClassName("heading");
     headings[1].classList.add("bold-italic");
 
+    let ratios = [0.42, 0.23, 0.33];
     for (let i = 0; i < headings.length; i++) {
       const containerSize = headings[i].clientWidth;
-      const letters = headings[i].innerHTML.length;
-      headings[i].style.fontSize = `${containerSize / (letters * 0.5)}px`;
-
-      headings[i].classList.add("overflow-check");
-      while (isOverflown(headings[i])) {
-        headings[i].style.fontSize = `${parseInt(headings[i].style.fontSize) -
-          1}px`;
-      }
-      headings[i].classList.remove("overflow-check");
+      headings[i].style.fontSize = `${(containerSize / 2) * ratios[i]}px`;
     }
   });
 
@@ -45,7 +36,7 @@ export default function HomePage() {
           </div>
         </section>
         <div className="image">
-          <img src="./img/card.png" alt="credit card" width={500} />
+          <img src="./img/card.png" alt="credit card" />
         </div>
       </div>
     </>
