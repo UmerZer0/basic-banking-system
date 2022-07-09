@@ -15,17 +15,16 @@
 .heading-box {
   color: white;
   margin: 5rem 0 0 0;
-  width: 100%;
-
+  min-width: 80%;
+  justify-self: center;
   padding: 0 4rem;
-
-  align-items: center;
 }
 
 .row-size {
   max-width: 25rem;
   margin: 0;
   display: flex;
+  justify-self: center;
 }
 
 .bold-italic {
