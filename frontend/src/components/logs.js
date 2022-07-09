@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./logs.style.css";
 import NavBar from "./Navbar";
+import CustomerDetails from "./CustomerDetails";
 
 export default class logs extends Component {
   constructor(props) {
@@ -61,9 +62,9 @@ export default class logs extends Component {
     let timePart = [hour, minute, second].join(":");
 
     /* format{
-    true: date only,
-    false: time only,
-    undefined: date and time,
+      true: date only,
+      false: time only,
+      undefined: date and time,
     }
     */
 
@@ -72,10 +73,36 @@ export default class logs extends Component {
     else return datePart + " " + timePart;
   }
 
+  clickHandler = (customer) => {
+    let card = document.getElementById("card");
+    let content = document.getElementsByClassName("customer");
+
+    if (card.style.opacity !== "1") card.style.opacity = "1";
+
+    axios
+      .get(`http://localhost:5000/customers/accountNo/${customer}`)
+      .then((response) => {
+        content[0].innerHTML = response.data.name;
+        content[1].innerHTML = response.data.email;
+        content[2].innerHTML = response.data.accountNo;
+        content[3].innerHTML = "$" + response.data.balance;
+      });
+
+    let btnCopy = document.querySelector(".send-btn");
+    btnCopy.innerHTML = "Copy to Clipboard";
+    btnCopy.onclick = () => {
+      /* Get the text field */
+      let copyText = document.querySelector(".acc-number");
+
+      /* Copy the text inside the text field */
+      navigator.clipboard.writeText(copyText.innerHTML);
+    };
+    document.getElementById("transfer-input").style.display = "none";
+  };
   destructArr(arr) {
     return arr.map((key, i) => {
       return (
-        <section className="log">
+        <section key={i} className="log">
           <div className="log-content">
             <div className="time-box grid-children">
               {this.formatDateTime(key.createdAt, false)}
@@ -85,7 +112,13 @@ export default class logs extends Component {
             </div>
             <p className="log-details grid-children">
               <span>
-                {key.sender} sent ${key.amount} to {key.receiver}
+                <span onClick={() => this.clickHandler(key.sender)}>
+                  {key.sender}
+                </span>{" "}
+                sent ${key.amount} to{" "}
+                <span onClick={() => this.clickHandler(key.receiver)}>
+                  {key.receiver}
+                </span>
               </span>
             </p>
             <div className="grid-children"> </div>
@@ -100,12 +133,10 @@ export default class logs extends Component {
       let objArray = this.state.logs[key];
 
       return (
-        <>
-          <div className="log-group-by-date">
-            <h2 className="log date-head">{key}</h2>
-            {this.destructArr(objArray)}
-          </div>
-        </>
+        <div key={i.toString()} className="log-group-by-date">
+          <h2 className="log date-head">{key}</h2>
+          {this.destructArr(objArray)}
+        </div>
       );
     });
   }
@@ -113,9 +144,14 @@ export default class logs extends Component {
   render() {
     return (
       <>
-        <div className="box">
-          <NavBar />
-          <div className="logs-container">{this.logList()}</div>
+        <NavBar />
+        <div className="body-container">
+          <section className="logs-container">{this.logList()}</section>
+          <section className="card-section">
+            <div className="position-fixed">
+              <CustomerDetails />
+            </div>
+          </section>
         </div>
       </>
     );

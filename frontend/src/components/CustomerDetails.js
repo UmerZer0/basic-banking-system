@@ -72,13 +72,9 @@ function CutomerDetails() {
             let card = document.getElementById("card");
             let transferInput = document.getElementById("transfer-input");
 
-            if (transferInput.classList.contains("disp-none")) {
-              card.style.width = "25rem";
+            if (transferInput.classList.contains("disp-none"))
               transferInput.classList.remove("disp-none");
-            } else {
-              // card.style.width = "20rem";
-              // transferInput.classList.add("disp-none");
-
+            else {
               let data = document.getElementsByClassName("input-field");
               let receiver = data[0].value;
               let amount = data[1].value;
@@ -97,7 +93,7 @@ function CutomerDetails() {
                 validity = false;
               } else if (sender === receiver) {
                 //Check if receiver is not the same as sender
-                accountnoError.innerHTML = "You can't send money to yourself";
+                accountnoError.innerHTML = "Sender and receiver cannot be same";
                 validity = false;
               } else {
                 //Check if account number exists
@@ -116,6 +112,10 @@ function CutomerDetails() {
                 balanceError.innerHTML = "Please enter a valid amount";
                 validity = false;
               }
+
+              document.querySelector(".send-btn").disabled = validity;
+              //? To block spamming of the button
+              //? Disable button if the transaction validity is true
 
               if (validity) {
                 axios
@@ -177,10 +177,3 @@ function CutomerDetails() {
 }
 
 export default CutomerDetails;
-
-//TODO: Add the following to the CustomerDetails div:
-/*  Add box shadow
-    ?Fix the color on div
-    Add functionalty to the button
-    Do the nav thing
-    ?Do them logs */

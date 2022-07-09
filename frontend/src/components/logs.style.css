@@ -1,6 +1,20 @@
 p {
   margin-bottom: 0 !important;
 }
+
+.body-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.card-section {
+  display: grid;
+  justify-items: center;
+}
+.position-fixed {
+  position: fixed;
+}
+
 .logs-container {
   color: white;
   font-weight: bold;
@@ -11,42 +25,10 @@ p {
   margin-left: 7rem;
 }
 
-/* .log:not(h2).log:not(:last-child) {
-  /* outline: auto; */
-/* margin-bottom: 1.5rem; */
-/* }  */
-/* .log:not(h2).log:not(:last-child) .tick-icon {
-  position: relative;
-} */
-/* .log:not(h2).log:not(:last-child) .tick-icon::after {
-  content: "Hi";
-  display: flex;
-  min-width: 50%;
-
-  border-top: 1.9px solid #fff;
-  border-bottom: 1.9px solid #fff;
-
-  transform: rotate(-90deg);
-  transform-origin: right;
-
-  /* position: absolute; */
-/* bottom: 0; */
-/* left: 0; */
-/* right: 0; */
-/* z-index: -1; */
-/* } */
-
 .date-head {
   font-size: 1rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
-}
-.log {
-  /* margin-top: 2.25rem;
-  margin-left: 7.5rem;
-  align-items: center; */
-
-  /* position: relative; */
 }
 
 .log-content {
@@ -54,7 +36,6 @@ p {
   grid-template-columns: 60px auto;
 
   margin-left: 0.5rem;
-  /* gap: 1rem; */
 }
 
 .grid-children:nth-child(1) {
