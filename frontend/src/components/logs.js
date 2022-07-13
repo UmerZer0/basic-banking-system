@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import "./logs.style.css";
+import "./style/logs.style.css";
 import NavBar from "./Navbar";
 import CustomerDetails from "./CustomerDetails";
 

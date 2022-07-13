@@ -1,6 +1,6 @@
 import React from "react";
 import { ReactComponent as UserSvg } from "./svg/userSolid.svg";
-import "./CustomerDetails.style.css";
+import "./style/CustomerDetails.style.css";
 import { ReactComponent as XmarkSvg } from "./svg/xmark-solid.svg";
 import axios from "axios";
 

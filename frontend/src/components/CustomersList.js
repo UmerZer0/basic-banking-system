@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import "./list.style.css";
+import "./style/list.style.css";
 import NavBar from "./Navbar";
 import { ReactComponent as UserSvg } from "./svg/userSolid.svg";
 import CustomerDetails from "./CustomerDetails";

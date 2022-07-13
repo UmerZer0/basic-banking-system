@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import React, { useEffect } from "react";
 import NavBar from "./Navbar";
-import "./home.style.css";
+import "./style/home.style.css";
 
 export default function HomePage() {
   useEffect(() => {
