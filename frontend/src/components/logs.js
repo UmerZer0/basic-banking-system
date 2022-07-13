@@ -112,11 +112,17 @@ export default class logs extends Component {
             </div>
             <p className="log-details grid-children">
               <span>
-                <span onClick={() => this.clickHandler(key.sender)}>
+                <span
+                  className="curs-pointer"
+                  onClick={() => this.clickHandler(key.sender)}
+                >
                   {key.sender}
                 </span>{" "}
                 sent ${key.amount} to{" "}
-                <span onClick={() => this.clickHandler(key.receiver)}>
+                <span
+                  className="curs-pointer"
+                  onClick={() => this.clickHandler(key.receiver)}
+                >
                   {key.receiver}
                 </span>
               </span>

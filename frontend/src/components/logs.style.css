@@ -7,6 +7,10 @@ p {
   grid-template-columns: 1fr 1fr;
 }
 
+.curs-pointer {
+  cursor: pointer;
+}
+
 .card-section {
   display: grid;
   justify-items: center;

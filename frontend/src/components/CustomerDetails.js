@@ -69,7 +69,6 @@ function CutomerDetails() {
         <button
           className="send-btn"
           onClick={() => {
-            let card = document.getElementById("card");
             let transferInput = document.getElementById("transfer-input");
 
             if (transferInput.classList.contains("disp-none"))
